@@ -8,9 +8,13 @@ Once an item has been published with a given category and datum id, the meaning 
 
 ##### Once a datum is locked, the following fields cannot be changed:
 
-* Datum ID
-* Datum Scale
-* Datum Type
+* For Datum objects
+ * Datum ID
+ * Datum Scale
+ * Datum Type
+* For Category objects
+ * Category ID
+ * Name (? not sure)
 
 ##### The following fields can be changed, but should not change in meaning
 
