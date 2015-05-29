@@ -49,7 +49,13 @@ The import/export function will be tested by importing a specification, then exp
 
 ## Immutability of Published Items
 
-Once an item has been published with a given category and datum id, the meaning of this should not be changed.
+Once an item has been published with a given category and datum id, the meaning of this should not be changed. A datum is this state is **locked**.
+
+#### Once a datum is locked, the following fields cannot be changed:
+
+* Datum ID
+* Datum Scale
+* Datum Type
 
 There is a time in between when an item is created and when it is published where it can be left 'open' - so if it has not been seen by anybody, it may be convenient to change its meaning. An indication of a category or datums "published" status may be gotten by seeing if it is reference in any **Published Specification Version**.
 
