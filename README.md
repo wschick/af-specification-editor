@@ -46,16 +46,25 @@ Export should produce a specification using the latest version of all active cat
 The import/export function will be tested by importing a specification, then exporting it, and comparing the results with [XmlUnit](http://www.xmlunit.org/)
 
 
-# Message Versions
+# Message Versioning
 
-## Should be incremented when:
+Some changes require the message version to change, some don't. When should the message version be changed?
 
-Anything that affects the wire format of a message changes, including:
-    
-* Datum within message change (field added/removed)
-* Field type changed
-    
- 
+When the wire format changes. Different change types should be seperated along these lines.
+
+### Requires a version increment
+
+* A field is added
+* A field is removed
+* A field type is changed (eg, from float to double)
+
+### Does NOT require a version increment
+
+* Category or datum labels change
+* Multicast group changes
+* Constraints change
+* Allowed values change
+
 
 # Deploying the Specification
 
@@ -74,7 +83,3 @@ The exported specification is now available as a release candidate. The specific
 When approved, the production deployment process records that that specification version has been promoted to production.
 
 
-* All Changes should be visible
-    * Implementation - check lastModified time of all objects?
-* An XML diff should be viewable
-    * Show any files changes since the last published version
