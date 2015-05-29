@@ -35,15 +35,6 @@ This is a reporter. They have the domain knowledge for the meaning of items.
 
 This is a technical role.
 
-# XML Import/Export
-
-XML Import and export will be provided to consume existing specification versions, and produce new ones.
-
-For Import, multiple versions can be imported, to populate historical message records. When importing, the latest specification will be considered first, and previous versions will be added going backwards in time.
-
-Export should produce a specification using the latest version of all active categories.
-
-The import/export function will be tested by importing a specification, then exporting it, and comparing the results with [XmlUnit](http://www.xmlunit.org/)
 
 # Behaviors of the specification model
 
@@ -79,6 +70,23 @@ When the wire format changes. Different change types should be seperated along t
 * Constraints change
 * Allowed values change
 
+# XML Import/Export
+
+XML Import and export will be provided to consume existing specification versions, and produce new ones.
+
+#### Export
+
+Export should produce a specification using the latest version of all active categories.
+
+#### Import 
+
+The import functionality will be used in initial development and migration from xml maintainence, as well as initial acceptance testing.
+
+For Import, multiple versions can be imported, to populate historical message records. When importing, the latest specification will be considered first, and previous versions will be added going backwards in time.
+
+##### Acceptance testing through import and export
+
+The import/export function will be tested by importing a specification, then exporting it, and comparing the results with [XmlUnit](http://www.xmlunit.org/)
 
 # Deploying the Specification
 
