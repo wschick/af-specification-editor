@@ -45,8 +45,16 @@ Export should produce a specification using the latest version of all active cat
 
 The import/export function will be tested by importing a specification, then exporting it, and comparing the results with [XmlUnit](http://www.xmlunit.org/)
 
+# Behaviors of the specification model
 
-# Message Versioning
+## Immutability of Published Items
+
+Once an item has been published with a given category and datum id, the meaning of this should not be changed.
+
+There is a time in between when an item is created and when it is published where it can be left 'open' - so if it has not been seen by anybody, it may be convenient to change its meaning. An indication of a category or datums "published" status may be gotten by seeing if it is reference in any **Published Specification Version**.
+
+
+## Message Versioning
 
 Some changes require the message version to change, some don't. When should the message version be changed?
 
@@ -68,7 +76,7 @@ When the wire format changes. Different change types should be seperated along t
 
 # Deploying the Specification
 
-The database will be exported to a **Specification Version** for deployment. This is a snapshot of the database. When a specification version is exported, it is considered a release candidate, and can undergo downstream integration and acceptance testing. Once a version has been approved downstream, that version will be recored as the **Latest Production Specification Version**.
+The database will be exported to a **Specification Version** for deployment. This is a snapshot of the database. When a specification version is exported, it is considered a release candidate, and can undergo downstream integration and acceptance testing. Once a version has been approved downstream, that version will be recored as a **Published Specification Version**.
 
 ### Process Story
 
