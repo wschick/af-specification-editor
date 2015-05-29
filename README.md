@@ -1,39 +1,3 @@
-# Usage Scenarios
-
-## A category is added
-
-A user (who?) defines a category.
-
-
-# UI Implementation
-
-## For simple objects
-
-For some simple object types, generic scaffolding will be used for management. This will be for types that are simple, and don't change often.
-
-Objects that will be managed by scaffolding:
-
-* DatumScale
-* DatumType
-* FieldType
-* MessageType
-
-## For Category/Datum/Messages
-
-This set of objects is more complicated, and modified more frequently. It will have custom UI built for management.
-
-
-# Application Roles
-
-The application will used role based security.
-
-## Editor
-
-This is a reporter. They have the domain knowledge for the meaning of items.
-
-## Administrator
-
-This is a technical role.
 
 
 # Behaviors of the specification model
@@ -42,11 +6,21 @@ This is a technical role.
 
 Once an item has been published with a given category and datum id, the meaning of this should not be changed. A datum is this state is **locked**.
 
-#### Once a datum is locked, the following fields cannot be changed:
+##### Once a datum is locked, the following fields cannot be changed:
 
 * Datum ID
 * Datum Scale
 * Datum Type
+
+##### The following fields can be changed, but should not change in meaning
+
+* Description
+* Short Description
+* Reporter Heading
+
+##### The following can change at any time
+
+* Display order
 
 There is a time in between when an item is created and when it is published where it can be left 'open' - so if it has not been seen by anybody, it may be convenient to change its meaning. An indication of a category or datums "published" status may be gotten by seeing if it is reference in any **Published Specification Version**.
 
@@ -69,6 +43,7 @@ When the wire format changes. Different change types should be seperated along t
 * Multicast group changes
 * Constraints change
 * Allowed values change
+* Changes to the menu location for reporter app
 
 # XML Import/Export
 
@@ -104,4 +79,33 @@ The exported specification is now available as a release candidate. The specific
 
 When approved, the production deployment process records that that specification version has been promoted to production.
 
+# UI Implementation
+
+## For simple objects
+
+For some simple object types, generic scaffolding will be used for management. This will be for types that are simple, and don't change often.
+
+Objects that will be managed by scaffolding:
+
+* DatumScale
+* DatumType
+* FieldType
+* MessageType
+
+## For Category/Datum/Messages
+
+This set of objects is more complicated, and modified more frequently. It will have custom UI built for management.
+
+
+# Application Roles
+
+The application will used role based security.
+
+## Editor
+
+This is a reporter. They have the domain knowledge for the meaning of items.
+
+## Administrator
+
+This is a technical role.
 
