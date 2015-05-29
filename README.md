@@ -61,7 +61,17 @@ Anything that affects the wire format of a message changes, including:
 
 The database will be exported to a **Specification Version** for deployment. This is a snapshot of the database. When a specification version is exported, it is considered a release candidate, and can undergo downstream integration and acceptance testing. Once a version has been approved downstream, that version will be recored as the **Latest Production Specification Version**.
 
-During the export process, the administrator will be shown a changes for review. The changes will be compared to the latest production version.
+### Process Story
+
+The admin starts the export process from the admin panel.
+
+They are shown all object changes, as derived from database metadata. These will be compared to the last production version. If these are ok, they continue.
+
+They are shown an xml-file view of the diff between the last production verion and the current version. They can view an index that shows if there are changes to a file, then open that file for an xml-diff. If thats ok, they approve the specification. 
+
+The exported specification is now available as a release candidate. The specification is run against the current unit and integration test suites in Jenkins. If those pass, the deployment artifacts (RPMs and MSIs) are deployed to acceptance test environments, so reporters can approve. 
+
+When approved, the production deployment process records that that specification version has been promoted to production.
 
 
 * All Changes should be visible
