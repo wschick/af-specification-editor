@@ -60,6 +60,7 @@ Anything that affects the wire format of a message changes, including:
 # Deploying the Specification
 
 The database will be exported to a **Specification Version** for deployment. This is a snapshot of the database. When a specification version is exported, it is considered a release candidate, and can undergo downstream integration and acceptance testing. Once a version has been approved downstream, that version will be recored as the **Latest Production Specification Version**.
+
 During the export process, the administrator will be shown a changes for review. The changes will be compared to the latest production version.
 
 
