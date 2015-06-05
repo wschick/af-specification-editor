@@ -1,15 +1,26 @@
 package af.specification.editor
 
-class DatumType {
+class DatumType extends SpecificationObject{
+
+    String name;
+    String description;
+    String display;
     
-    String code;
 
     static constraints = {
-        code unique: true
+        name unique: true,blank: false
+        description()
+        display()
+        
     }
 
     @Override
     String toString(){
-        return code;
+        return name;
+    }
+
+    @Override
+    boolean isPublished(){
+        return false;
     }
 }

@@ -1,16 +1,25 @@
 package af.specification.editor
 
-class DatumScale {
-    
-    String code;
+class DatumScale extends SpecificationObject {
+
+    String name;
+    String description;
+    String display;
 
     static constraints = {
-        code unique: true
+        name unique: true
+        description nullable: true
+        display nullable: true
     
     }
     
     @Override
     String toString(){
-        return code;
+        return name;
+    }
+    
+    @Override
+    boolean isPublished(){
+        return false;
     }
 }

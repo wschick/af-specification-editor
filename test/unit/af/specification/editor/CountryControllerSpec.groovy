@@ -1,5 +1,6 @@
 package af.specification.editor
 
+import af.specification.editor.scaffolding.CountryController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

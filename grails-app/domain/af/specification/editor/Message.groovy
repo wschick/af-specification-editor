@@ -1,14 +1,47 @@
 package af.specification.editor
 
-class Message {
+import grails.rest.Resource
+import org.apache.commons.lang.builder.HashCodeBuilder
 
-    int messageVersion;
-    boolean hasEstimate;
-    MulticastGroup releaseMulticastGroup;
-    MulticastGroup estimateMulticastGroup;
+class Message extends SpecificationObject{
+
+    Category category;
+    MessageType messageType;
+    Integer messageVersion;
     
-    static hasMany = ['messageFields':MessageField]
+    boolean hasEstimate;
+    MulticastGroup multicastGroup;
+    
+    static belongsTo = ['category':Category]
+    static hasMany = ['messageFields':MessageField,'specifications':Specification]
     
     static constraints = {
+        messageVersion unique: ['category','messageType'],validator: validateImmutablityFor("messageVersion")
+        category validator: validateFieldsMatchCategory
+        messageType()
+        hasEstimate()
+        multicastGroup()
+        
+        specifications display: false
+    }
+    
+    static  def validateFieldsMatchCategory = {Category category, Message message ->
+        if (message.messageFields.find({ it.datum.category.id != category.id})) {
+            return false
+        }
+    }
+
+
+    @Override
+    boolean isPublished(){
+        for (Specification specification:specifications)
+            if (specification.isPublished())
+                return true;
+    }
+    
+    @Override
+    String toString(){
+        return "Type: ${messageType} Version: ${messageVersion}";
+        
     }
 }

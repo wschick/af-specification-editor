@@ -1,22 +1,42 @@
 package af.specification.editor
 
-class Category {
-    
-    long id;
+import grails.converters.JSON
+import grails.rest.Resource
+
+class Category extends SpecificationObject {
+
+    Integer categoryId;
     String name;
     String description;
     String reporterHeading;
     Country country;
     String releaseMethod;
     String releaseLocation;
+    List<Datum> data;
     
     static hasMany = ['messages':Message,
                         'data': Datum]
 
-    static mapping = {
-        id generator: "assigned"
-    }
+   
     static constraints = {
         description maxSize: 2048
+        categoryId unique: true, validator: validateImmutablityFor("categoryId")
+        name unique: true , validator: validateImmutablityFor("name")
     }
+    
+    static transients = ['published']
+    
+    boolean isPublished(){
+        for(Message message: messages)
+            if (message.isPublished())
+                return true;
+    }
+    
+    @Override
+    String toString(){
+        return "${categoryId}: ${name}"
+        
+    }
+    
+
 }

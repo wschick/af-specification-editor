@@ -4,6 +4,11 @@ import grails.transaction.Transactional
 
 @Transactional
 class XmlImportService {
+    
+    def importProtocolValidationSpecification(String xmlString){
+        
+        
+    }
 
     def importCategorySpecificationFromXmlString(String xmlString) {
         
@@ -12,7 +17,7 @@ class XmlImportService {
         
         xml.category.each{categoryXml ->
             Category category = new Category();
-            category.id = categoryXml.category_id.toInteger();
+            category.categoryId = categoryXml.category_id.toInteger();
             category.name = categoryXml.@name;
             category.description = categoryXml.description;
             category.reporterHeading = categoryXml.reporter_heading;
@@ -29,9 +34,7 @@ class XmlImportService {
             categoryXml.data.datum.each{datumXml ->
                 Datum datum = new Datum();
                 datum.datumId = datumXml.datum_id.toInteger();
-                
-                if (datumXml.display_order.size())
-                    datum.displayOrder = datumXml.display_order.toInteger()
+
                 
                 datum.description = datumXml.description
                 datum.shortDescription = datumXml.short_description
@@ -40,14 +43,43 @@ class XmlImportService {
                 String datumTypeCode = datumXml.datum_type;
                 String datumScaleCode = datumXml.datum_scale;
                 
-                datum.datumType = DatumType.findByCode(datumTypeCode)?:new DatumType(code: datumTypeCode).save();
-                datum.datumScale = DatumScale.findByCode(datumScaleCode)?:new DatumScale(code: datumScaleCode).save();
+                datum.datumType = DatumType.findByName(datumTypeCode)?:new DatumType(name: datumTypeCode).save();
+                datum.datumScale = DatumScale.findByName(datumScaleCode)?:new DatumScale(name: datumScaleCode).save();
                 
                 datum.category = category;
+                
+                category.addToData(datum);
 
                 if(!datum.save(flush: true))
                     throw new Exception("Failed to save datum: ${category.id} ${datum.datumId} ${datum.errors.allErrors}")
                 
+            }
+            
+            categoryXml.messages.message.each{messageXml ->
+                Message message = new Message();
+                message.category = category;
+                println(messageXml.message_type)
+                println(messageXml.multicast_group)
+                message.messageType = MessageType.findByName(messageXml.message_type.toString())
+                message.multicastGroup = MulticastGroup.findByName(messageXml.multicast_group.toString())
+                message.messageVersion = messageXml.message_version.toInteger()
+                
+                if (! message.save())
+                    throw new Exception("Failed to save message: ${category.id} ${message} ${message.errors.allErrors}")
+                
+                messageXml.fields.field.each({ field_xml->
+                    MessageField messageField = new MessageField()
+                    messageField.message = message
+                    messageField.datum = Datum.findByCategoryAndDatumId(category,field_xml.datum_id.toInteger());
+                    messageField.displayOrder =1
+                    messageField.exampleValue = field_xml.example_value
+                    messageField.fieldType = FieldType.findByName(field_xml.field_type);
+
+                    if (! messageField.save())
+                        throw new Exception("Failed to save message field: ${category.id} ${message} ${messageField.errors.allErrors}")
+                    
+                    
+                })
             }
 
             
