@@ -20,8 +20,8 @@ class Category extends SpecificationObject {
    
     static constraints = {
         description maxSize: 2048
-        categoryId unique: true, validator: validateImmutablityFor("categoryId")
-        name unique: true , validator: validateImmutablityFor("name")
+        categoryId unique: true, immutable:true
+        name unique: true , immutable:true
     }
     
     static transients = ['published']

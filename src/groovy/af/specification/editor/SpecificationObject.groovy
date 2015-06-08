@@ -10,7 +10,7 @@ abstract class SpecificationObject {
     static def validateImmutablityFor(String field) {
         
         return { value,SpecificationObject object,errors ->
-            println("Validating immutability for ${field} on ${object}")
+            //println("Validating immutability for ${field} on ${object}")
             
             def c = object.class
             
@@ -41,5 +41,11 @@ abstract class SpecificationObject {
     def beforeDelete = {
         if (isPublished())
             return false;
+    }
+    
+    @Override
+    boolean equals(Object o){
+        throw new Exception();
+        
     }
 }

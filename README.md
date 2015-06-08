@@ -2,6 +2,24 @@
 
 # Behaviors of the specification model
 
+## Immutability Implementation
+
+### For simple fields
+
+Object fields can be marked as immutable by applying the "immutable: true" constraint.
+
+If an object has immutable fields, it must implement the [Publishable]() interface.
+
+### For collections
+
+For items in a collection, the owning side must have the "immutable: true" constraint on the collection field, and the owned side must have "immutable: true" set
+
+        ^
+        | Is that true?
+
+-------------------------------------------
+
+
 ## Immutability of Published Items
 
 Once an item has been published with a given category and datum id, the meaning of this should not be changed. A datum is this state is **locked**.

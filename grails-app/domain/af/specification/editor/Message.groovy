@@ -16,11 +16,12 @@ class Message extends SpecificationObject{
     static hasMany = ['messageFields':MessageField,'specifications':Specification]
     
     static constraints = {
-        messageVersion unique: ['category','messageType'],validator: validateImmutablityFor("messageVersion")
-        category validator: validateFieldsMatchCategory
-        messageType()
+        messageVersion unique: ['category','messageType'],immutable:true
+        category validator: validateFieldsMatchCategory, immutable:true
+        messageType immutable: true
         hasEstimate()
         multicastGroup()
+        messageFields immutable: true
         
         specifications display: false
     }

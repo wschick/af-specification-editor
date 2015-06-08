@@ -1,8 +1,10 @@
 import af.specification.editor.Category
+import af.specification.editor.ImmutabilityConstraint
 import af.specification.editor.Message
 import af.specification.editor.ProtocolValidationImportService
 import af.specification.editor.Specification
 import af.specification.editor.XmlImportService
+import org.codehaus.groovy.grails.validation.ConstrainedProperty
 import org.spockframework.compiler.model.Spec
 
 class BootStrap {
@@ -11,6 +13,7 @@ class BootStrap {
     ProtocolValidationImportService protocolValidationImportService
 
     def init = { servletContext ->
+
 
         protocolValidationImportService.importProtocolValidationSpecification(new File("/etc/ntkn-protocol-docs/ProtocolValidationSpecification.xml").text)
         

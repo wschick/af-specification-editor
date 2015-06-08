@@ -40,6 +40,8 @@ private renderFieldForProperty(p, owningClass, prefix = "") {
 	<label for="${prefix}${p.name}" class="control-label col-sm-2">
 		<g:message code="${domainClass.propertyName}.${prefix}${p.name}.label" default="${p.naturalName}" />
 		<% if (required) { %><span class="required-indicator">*</span><% } %>
+		<%  if (cp.getAppliedConstraint("immutable")) {%>†<%}%>
+		<%  if (cp.getAppliedConstraint("requiredForPublication")) {%>‡<%}%>
 	</label>
 
 		<div class="col-sm-10">

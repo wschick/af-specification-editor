@@ -8,7 +8,7 @@ class DatumType extends SpecificationObject{
     
 
     static constraints = {
-        name unique: true,blank: false
+        name unique: true,blank: false, immutable:true
         description()
         display()
         

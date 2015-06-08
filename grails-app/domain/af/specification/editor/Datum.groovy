@@ -19,10 +19,12 @@ class Datum extends SpecificationObject{
 
     static constraints = {
         description maxSize: 2048
-        datumScale nullable: true
+        datumId unique: ['category'], immutable:true
+        datumType immutable:true
+        datumScale nullable: true, immutable:true
         reporterHeading maxSize: 2048
         shortDescription maxSize: 2048
-        datumId unique: ['category']
+        
     }
     
     @Override

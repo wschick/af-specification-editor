@@ -11,7 +11,7 @@ class MessageField extends SpecificationObject {
     static belongsTo = ['message':Message]
 
     static constraints = {
-        datum validator: {val,MessageField messageField ->
+        datum unique: ['message'], validator: {val,MessageField messageField ->
             if (!messageField.message.category.data.contains(val))
                 return false;
         }

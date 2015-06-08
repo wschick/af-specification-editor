@@ -48,9 +48,15 @@
 						<fieldset class="buttons">
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
+									<p class="help-block">*: Required †: Immutable after publication</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
 									<g:actionSubmit class="save btn btn-default" action="update" value="\${message(code: 'default.button.update.label', default: 'Update')}" />
 								</div>
 							</div>
+							
 						</fieldset>
 					</g:form>
 				</div>
