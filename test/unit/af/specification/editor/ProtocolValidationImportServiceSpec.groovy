@@ -17,53 +17,7 @@ class ProtocolValidationImportServiceSpec extends Specification {
     def cleanup() {
     }
 
-    void "it should import all multicast groups"() {
-        given:
-        "an xml val spec"
-        def xml = """
-<validations>
-    <multicast_groups>
-        <multicast_group id="34" name="SYSTEM_HEARTBEAT" address="233.52.220.1" port="25001"/>
-    </multicast_groups>
-</validations>
-"""
-        when:
-        "the specification is imported"
-        service.importProtocolValidationSpecification(xml);
-        
-        then:
-        "a multicast group should be created"
-        MulticastGroup.all.size() == 1
-        
-        and:
-        "it should have the correct fields"
-        MulticastGroup.get(1).name == "SYSTEM_HEARTBEAT"
-        MulticastGroup.get(1).multicastGroupId == 34
-    }
 
-    void "it should throw an exception if multicast group is missing an attribute"() {
-        given:
-        "an malformed xml val spec"
-        def xml = """
-<validations>
-    <multicast_groups>
-        <multicast_group id="34"  address="233.52.220.1" port="25001"/>
-    </multicast_groups>
-</validations>
-"""
-        when:
-        "the specification is imported"
-        service.importProtocolValidationSpecification(xml);
-
-        then:
-        "an exception should be thrown"
-       thrown(Exception)
-
-        and:
-        "no multicast group should be created"
-        MulticastGroup.all.size() == 0
-
-    }
     
     void "it should import the message types"(){
         given:

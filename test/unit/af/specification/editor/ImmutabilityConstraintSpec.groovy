@@ -1,5 +1,6 @@
 package af.specification.editor
 
+import grails.test.mixin.Mock
 import org.codehaus.groovy.grails.plugins.testing.GrailsMockErrors
 import org.hibernate.Session
 import org.springframework.validation.Errors
@@ -8,6 +9,7 @@ import spock.lang.Shared
 /**
  * Created by will.schick on 6/8/15.
  */
+@Mock([Datum])
 class ImmutabilityConstraintSpec extends spock.lang.Specification {
     
     @Shared
@@ -28,6 +30,7 @@ class ImmutabilityConstraintSpec extends spock.lang.Specification {
         int intField;
         String stringField;
         Datum datumField;
+        List<Datum> collectionField;
         
         static TestObject get(Object id){
             return persistence[id];
@@ -100,11 +103,14 @@ class ImmutabilityConstraintSpec extends spock.lang.Specification {
 
         and:
         "a saved item with a datum"
-        TestObject.persistence[123l] = new TestObject(datumField: new Datum(id:99));
+        def savedDatum = new Datum()
+        savedDatum.id = 99
+        TestObject.persistence[123l] = new TestObject(datumField: savedDatum);
 
         when:
         "constraint is checked with a new datum (by id)"
-        constraint.processValidate(testObject,new Datum(id: 88),errors);
+        def unsavedDatum = new Datum(id: 88)
+        constraint.processValidate(testObject,unsavedDatum,errors);
 
         then:
         "there should be  errors"

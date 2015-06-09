@@ -1,26 +1,21 @@
 package af.specification.editor
 
-class MessageType extends SpecificationObject {
+class MulticastEnvironmentType extends SpecificationObject {
 
     String name;
     String description;
-    Integer value;
-    
     static constraints = {
         name unique: true
-        value unique: true
-    }
-    
-    static mapping = {
-    }
-    
-    @Override
-    String toString(){
-        return name;
+        description unique: true
     }
 
     @Override
     boolean isPublished(){
         return false;
+    }
+    
+    @Override
+    String toString(){
+        return name;
     }
 }

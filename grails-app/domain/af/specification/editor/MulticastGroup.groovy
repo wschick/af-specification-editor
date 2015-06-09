@@ -6,6 +6,9 @@ class MulticastGroup extends SpecificationObject {
     Integer multicastGroupId;
     String name;
     String description;
+    MulticastGrouping multicastGrouping;
+    
+    static hasMany = ['multicastEnvironments':MulticastEnvironment]
     
     
     

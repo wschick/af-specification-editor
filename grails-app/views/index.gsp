@@ -81,19 +81,55 @@
 		</style>
 	</head>
 	<body>
-	
-		<div>
+
+	<h2 class="page-header"> Alpha Flash Specification </h2>
+	<div class="row">
+		<div class="col-md-4">
+			<h3>Tasks</h3>
+			<ul>
+				<li>Create a new message version</li>
+				<li>Create specification release candidate</li>
+			</ul>
 			<h3>Manage Specification Objects</h3>
+			<h4>Enumerations/Constants</h4>
 			<ul>
 			<g:each in="${grailsApplication.getArtefacts("Domain")}" var="domainClass">
-				<li><a href="${domainClass.logicalPropertyName}"> ${domainClass.naturalName} </a></li>
+				<g:if test="${domainClass.naturalName.contains('Type') || domainClass.naturalName.contains('Scale')}">
+					<li><a href="${domainClass.logicalPropertyName}?max=100"> ${domainClass.naturalName} </a></li>
+				</g:if>
 				
 			</g:each>
+			</ul>
+			<h4>Multicast Configuration</h4>
+			<ul>
+				<g:each in="${grailsApplication.getArtefacts("Domain")}" var="domainClass">
+					<g:if test="${domainClass.naturalName.contains('Multicast')}">
+						<li><a href="${domainClass.logicalPropertyName}?max=100"> ${domainClass.naturalName} </a></li>
+					</g:if>
+
+				</g:each>
+			</ul>
+			<h4>Other</h4>
+			<ul>
+				<g:each in="${grailsApplication.getArtefacts("Domain")}" var="domainClass">
+					<g:if test="${!domainClass.naturalName.contains('Multicast') &&
+								!domainClass.naturalName.contains('Type') &&
+								!domainClass.naturalName.contains('Scale')}">
+						<li><a href="${domainClass.logicalPropertyName}?max=100"> ${domainClass.naturalName} </a></li>
+					</g:if>
+
+				</g:each>
 			</ul>
 			
 		</div>
 	
-	<g:changes></g:changes>
+		<div class="col-md-8">
+			<h3>Recent Changes</h3>
+			<g:changes></g:changes>
+		</div>
+	</div>
+	
+	<h3 class="page-header"> Development Information </h3>
 		<div id="page-body" role="main">
 
 

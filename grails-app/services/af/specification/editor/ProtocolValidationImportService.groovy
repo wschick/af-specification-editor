@@ -11,12 +11,13 @@ class ProtocolValidationImportService {
         
         xml.multicast_groups.multicast_group.each{multicast_group ->
             
-            def multicastGroup = new MulticastGroup();
+            /*def multicastGroup = new MulticastGroup();
             multicastGroup.multicastGroupId = multicast_group.@id.toInteger()
             multicastGroup.name =  multicast_group.@name;
             
             if (!multicastGroup.save())
                 throw new Exception("Failed to import mutlicast group: ${multicastGroup.errors.allErrors}")
+                */
 
         }
 

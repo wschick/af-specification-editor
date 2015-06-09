@@ -6,34 +6,11 @@ abstract class SpecificationObject {
     
     Date dateCreated
     Date lastUpdated
-    
-    static def validateImmutablityFor(String field) {
-        
-        return { value,SpecificationObject object,errors ->
-            //println("Validating immutability for ${field} on ${object}")
-            
-            def c = object.class
-            
-            if (object.isPublished()){
-                
-                def oldValue = null
-                def oldValueExists = false;
-                
-                c.withNewSession { session ->
-                    def old = c.get(object.id)
-                    if (old) {
-                        oldValueExists = true;
-                        oldValue = old[field];
-                    }
-                }
-                
-                if (!oldValueExists)
-                    return true;
-                
-                if(oldValue != value)
-                    errors.rejectValue(field,'af.specification.immutablity',field)
-            }
-        }
+    String lastUpdatedBy = "anonymous"
+    String createdBy = "anonymous"
+    static constraints = {
+        lastUpdatedBy editable:false, display: false
+        createdBy editable:false, display: false
     }
     
     abstract boolean isPublished()
@@ -45,7 +22,12 @@ abstract class SpecificationObject {
     
     @Override
     boolean equals(Object o){
-        throw new Exception();
+        if (this.class != o.class)
+            return false;
+        
+        println("Comparing ${o.id} ${this.id}")
+        
+        return o.id == this.id;
         
     }
 }

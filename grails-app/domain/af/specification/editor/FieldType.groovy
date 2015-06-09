@@ -1,6 +1,6 @@
 package af.specification.editor
 
-class FieldType {
+class FieldType extends SpecificationObject {
 
     Integer fieldTypeId
     String name
@@ -15,5 +15,10 @@ class FieldType {
     @Override
     String toString(){
         return name;
+    }
+
+    @Override
+    boolean isPublished(){
+        return false;
     }
 }
