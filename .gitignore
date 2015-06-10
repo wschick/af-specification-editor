@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
 target
+web-app/bower_components
+web-app/node_modules

@@ -2,18 +2,18 @@ package af.specification.editor
 /**
  * Created by will.schick on 6/2/15.
  */
-abstract class SpecificationObject {
+abstract class SpecificationObject implements Publishable {
     
     Date dateCreated
     Date lastUpdated
     String lastUpdatedBy = "anonymous"
     String createdBy = "anonymous"
+    
     static constraints = {
         lastUpdatedBy editable:false, display: false
         createdBy editable:false, display: false
     }
     
-    abstract boolean isPublished()
     
     def beforeDelete = {
         if (isPublished())

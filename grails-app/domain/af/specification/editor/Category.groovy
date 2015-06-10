@@ -10,8 +10,8 @@ class Category extends SpecificationObject {
     String description;
     String reporterHeading;
     Country country;
-    String releaseMethod;
-    String releaseLocation;
+    ReleaseMethod releaseMethod;
+    ReleaseLocation releaseLocation;
     List<Datum> data;
     
     static hasMany = ['messages':Message,
@@ -22,6 +22,8 @@ class Category extends SpecificationObject {
         description maxSize: 2048
         categoryId unique: true, immutable:true
         name unique: true , immutable:true
+        releaseLocation nullable: true
+        releaseMethod nullable: true
     }
     
     static transients = ['published']

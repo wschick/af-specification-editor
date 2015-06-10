@@ -1,0 +1,19 @@
+{
+  "name": "web-app",
+  "version": "0.0.0",
+  "homepage": "https://github.com/wschick/af-specification-editor",
+  "authors": [
+    "will.schick <wschick@mni-news.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}

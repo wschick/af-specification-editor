@@ -13,13 +13,16 @@ class Datum extends SpecificationObject{
     DatumScale datumScale;
 
 
-    static hasMany = ['messageFields':MessageField]
+    static hasMany = ['messageFields':MessageField,
+                      'rangeConstraints':RangeConstraint,
+                      'outerRangeConstraints':OuterRangeConstraint ]
     
     static belongsTo = ['category':Category]
 
     static constraints = {
         description maxSize: 2048
         datumId unique: ['category'], immutable:true
+        category()
         datumType immutable:true
         datumScale nullable: true, immutable:true
         reporterHeading maxSize: 2048
@@ -37,7 +40,7 @@ class Datum extends SpecificationObject{
     
     @Override
     String toString(){
-        return "${datumId}: ${description}"
+        return "Category: ${category.categoryId} Datum: ${datumId} - ${description}"
     }
 
 
